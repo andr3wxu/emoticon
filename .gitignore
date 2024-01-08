@@ -1,0 +1,5 @@
+.DS_Store
+emoticon-server/db/WiredTiger.turtle
+emoticon-server/db/WiredTiger.wt
+emoticon-server/db/diagnostic.data/metrics.interim
+emoticon-server/db/journal/WiredTigerLog.0000000002
