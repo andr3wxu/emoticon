@@ -43,8 +43,11 @@ app.put('/api/getPredict', async (req, res) => {
     console.log("Getting prediction...");
 
     const predict = spawn('python3', ['./src/predict.py', img_array]);
+    console.log(2343);
     predict.stdout.on('data', (data) => {
       if (data) {
+        console.log(data);
+        res.send(data);
         res.json(parseInt(data));
       } else {
         res.status(500).send("Unable to retrieve prediction.");
