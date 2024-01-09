@@ -89,7 +89,6 @@ function Canvas(props) {
 
 
     async function getPrediction(imgArray) {
-        console.log(imgArray);
         const response = await axios.put('http://localhost:2000/api/getPredict', {img_array: imgArray});
         const prediction = response.data;
         props.sendPrediction(prediction);

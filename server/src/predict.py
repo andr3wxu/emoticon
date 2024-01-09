@@ -83,11 +83,8 @@ def predict():
   img_array = np.array(img_array)
   inputs = img_array.reshape(-1, 1)
 
-  # print(inputs)
   predicted = nn2.predict(inputs)
   print(predicted+1)
-  # print(typeof(prediction))
-  # print("hi")
 
 if __name__ == "__main__":
   predict()

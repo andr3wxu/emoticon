@@ -3,12 +3,11 @@ import cors from "cors";
 import { MongoClient } from "mongodb"
 import { spawn } from "child_process";
 
-// const client = new MongoClient('mongodb://')
-
 const app = express();
 app.use(cors())
 app.use(express.json())
 
+// db function not strictly necessary, for future development.
 // const client = new MongoClient('mongodb://127.0.0.1:27017');
 
 // app.post('/api/sendImg', async (req, res) => {
@@ -26,20 +25,20 @@ app.use(express.json())
 // });
 
 app.put('/api/getPredict', async (req, res) => {
-  const { img_array } = req.body;
-  console.log(img_array);
   try {
+    const { img_array } = req.body;
+    console.log("Getting prediction...");
+
     const predict = spawn('python3', ['./src/predict.py', img_array]);
     predict.stdout.on('data', (data) => {
       if (data) {
-        res.send(data);
-        console.log(data.toString());
+        res.json(parseInt(data));
       } else {
-        res.sendStatus(500);
+        res.status(500).send("Unable to retrieve prediction.");
       }
     })
   } catch (error) {
-    res.sendStatus(500);
+    res.status(500).send("Unexpected error occured.");
   }
 })
 
