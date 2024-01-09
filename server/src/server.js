@@ -2,10 +2,15 @@ import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb"
 import { spawn } from "child_process";
+import path from "path";
+
+const __dirname = path.resolve("");
+const distPath = path.join(__dirname, "../emoticon-client/dist");
 
 const app = express();
-app.use(cors())
-app.use(express.json())
+app.use(express.static(distPath));
+app.use(cors());
+app.use(express.json());
 
 // db function not strictly necessary, for future development.
 // const client = new MongoClient('mongodb://127.0.0.1:27017');
@@ -23,6 +28,14 @@ app.use(express.json())
 //     client.close();
 //   }
 // });
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  })
+})
 
 app.put('/api/getPredict', async (req, res) => {
   try {
