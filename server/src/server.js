@@ -44,7 +44,7 @@ app.put('/api/getPredict', async (req, res) => {
 
     const predict = spawn('python3', ['./src/predict.py', img_array]);
     console.log(2343);
-    res.send(2312);
+    return res.json(2312);
     predict.stdout.on('data', (data) => {
       if (data) {
         console.log(data);
