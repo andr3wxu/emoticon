@@ -49,12 +49,12 @@ app.put('/api/getPredict', async (req, res) => {
         console.log(parseInt(data));
         return res.send(data);
       } else {
-        res.status(500).send("Unable to retrieve prediction.");
+        return res.status(500).send("Unable to retrieve prediction.");
       }
     })
     predict.stderr.on('data', (data) => {
       console.error('stderr:', data.toString());
-      res.status(500).send("Error during script execution.");
+      return res.status(500).send("Error during script execution.");
     });
     console.log(123213);
   } catch (error) {
@@ -62,7 +62,7 @@ app.put('/api/getPredict', async (req, res) => {
   }
 })
 
-let server = app.listen(2000, '0.0.0.0', () => {
+let server = app.listen(2000, '3.144.174.132', () => {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Listening at http://%s:%s', host, port);
