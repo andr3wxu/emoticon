@@ -2,13 +2,8 @@ import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb"
 import { spawn } from "child_process";
-import path from "path";
-
-const __dirname = path.resolve("");
-const distPath = path.join(__dirname, "../emoticon-client/dist");
 
 const app = express();
-app.use(express.static(distPath));
 app.use(cors());
 app.use(express.json());
 
@@ -28,14 +23,6 @@ app.use(express.json());
 //     client.close();
 //   }
 // });
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  })
-})
 
 app.put('/api/getPredict', async (req, res) => {
   try {
@@ -62,7 +49,7 @@ app.put('/api/getPredict', async (req, res) => {
   }
 })
 
-let server = app.listen(2000, '3.144.174.132', () => {
+let server = app.listen(2000, () => {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Listening at http://%s:%s', host, port);
