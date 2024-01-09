@@ -8,7 +8,7 @@ const __dirname = path.resolve("");
 const distPath = path.join(__dirname, "../emoticon-client/dist");
 
 const app = express();
-// app.use(express.static(distPath));
+app.use(express.static(distPath));
 app.use(cors());
 app.use(express.json());
 
@@ -29,13 +29,13 @@ app.use(express.json());
 //   }
 // });
 
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(distPath, "index.html"), (err) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   })
-// })
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  })
+})
 
 app.put('/api/getPredict', async (req, res) => {
   try {
@@ -47,11 +47,12 @@ app.put('/api/getPredict', async (req, res) => {
     predict.stdout.on('data', (data) => {
       if (data) {
         console.log(parseInt(data));
-        return res.send(data);
+        // return res.send(data);
       } else {
         res.status(500).send("Unable to retrieve prediction.");
       }
     })
+    res.json(2);
     console.log(123213);
   } catch (error) {
     res.status(500).send("Unexpected error occured.");
