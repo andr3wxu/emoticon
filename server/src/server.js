@@ -42,7 +42,7 @@ app.put('/api/getPredict', async (req, res) => {
     const { img_array } = req.body;
     console.log("Getting prediction...");
 
-    const predict = spawn('python3', ['./predict.py', img_array]);
+    const predict = spawn('python3', ['./src/predict.py', img_array]);
     console.log(2343);
     predict.stdout.on('data', (data) => {
       if (data) {
@@ -52,6 +52,10 @@ app.put('/api/getPredict', async (req, res) => {
         res.status(500).send("Unable to retrieve prediction.");
       }
     })
+    predict.stderr.on('data', (data) => {
+      console.error('stderr:', data.toString());
+      res.status(500).send("Error during script execution.");
+    });
     console.log(123213);
   } catch (error) {
     res.status(500).send("Unexpected error occured.");

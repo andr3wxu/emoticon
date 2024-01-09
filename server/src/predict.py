@@ -66,10 +66,10 @@ class NeuralNetwork() :
     return max
 
 def predict():
-  o_weights = np.load("./v2_weights/o_weights.npy")
-  o_bias = np.load("./v2_weights/o_bias.npy")
-  h_weights = np.load("./v2_weights/h_weights.npy")
-  h_bias = np.load("./v2_weights/h_bias.npy")
+  o_weights = np.load("./src/v2_weights/o_weights.npy")
+  o_bias = np.load("./src/v2_weights/o_bias.npy")
+  h_weights = np.load("./src/v2_weights/h_weights.npy")
+  h_bias = np.load("./src/v2_weights/h_bias.npy")
 
   hnum, inum = h_weights.shape
   onum, _ = o_weights.shape
