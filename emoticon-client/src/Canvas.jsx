@@ -89,7 +89,12 @@ function Canvas(props) {
 
 
     async function getPrediction(imgArray) {
-        const response = await axios.put('http://localhost:2000/api/getPredict', {img_array: imgArray});
+        const options = {
+            headers:{
+                mode: 'cors'
+            }
+        }
+        const response = await axios.put('http://localhost:2000/api/getPredict', {img_array: imgArray}, options);
         const prediction = response.data;
         props.sendPrediction(prediction);
     }
