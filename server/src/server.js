@@ -44,18 +44,15 @@ app.put('/api/getPredict', async (req, res) => {
 
     const predict = spawn('python3', ['./src/predict.py', img_array]);
     console.log(2343);
-    return res.json(2312);
     predict.stdout.on('data', (data) => {
       if (data) {
-        console.log(data);
-        res.send(data);
-        res.json(parseInt(data));
+        console.log(parseInt(data));
+        return res.send(data);
       } else {
         res.status(500).send("Unable to retrieve prediction.");
       }
     })
     console.log(123213);
-    res.send(1);
   } catch (error) {
     res.status(500).send("Unexpected error occured.");
   }
