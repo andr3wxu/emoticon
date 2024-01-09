@@ -8,7 +8,7 @@ const __dirname = path.resolve("");
 const distPath = path.join(__dirname, "../emoticon-client/dist");
 
 const app = express();
-app.use(express.static(distPath));
+// app.use(express.static(distPath));
 app.use(cors());
 app.use(express.json());
 
@@ -29,13 +29,13 @@ app.use(express.json());
 //   }
 // });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  })
-})
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(distPath, "index.html"), (err) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   })
+// })
 
 app.put('/api/getPredict', async (req, res) => {
   try {
