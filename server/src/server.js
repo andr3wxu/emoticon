@@ -56,5 +56,7 @@ app.put('/api/getPredict', async (req, res) => {
 })
 
 app.listen(2000, () => {
-  console.log("Listening...")
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('Listening at http://%s:%s', host, port);
 });
