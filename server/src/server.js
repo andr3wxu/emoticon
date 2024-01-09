@@ -47,12 +47,11 @@ app.put('/api/getPredict', async (req, res) => {
     predict.stdout.on('data', (data) => {
       if (data) {
         console.log(parseInt(data));
-        // return res.send(data);
+        return res.send(data);
       } else {
         res.status(500).send("Unable to retrieve prediction.");
       }
     })
-    res.json(2);
     console.log(123213);
   } catch (error) {
     res.status(500).send("Unexpected error occured.");
